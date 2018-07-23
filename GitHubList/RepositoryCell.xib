@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="RepositoryCell" customModule="GitHubList" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="345" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="repository name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2N-PS-Odw">
+                        <rect key="frame" x="16" y="11" width="313" height="23"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-Po-qfq">
+                        <rect key="frame" x="293" y="50" width="36" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6CU-VM-HaO">
+                        <rect key="frame" x="16" y="48" width="253" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="E2N-PS-Odw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="1ed-o8-BR6"/>
+                    <constraint firstItem="E2N-PS-Odw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="9cD-Xa-ZJu"/>
+                    <constraint firstItem="6CU-VM-HaO" firstAttribute="top" secondItem="E2N-PS-Odw" secondAttribute="bottom" constant="14" id="Eh9-oh-jH6"/>
+                    <constraint firstItem="6CU-VM-HaO" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Qak-Bb-zuK"/>
+                    <constraint firstItem="Hgc-Po-qfq" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="VVo-jb-nbf"/>
+                    <constraint firstItem="E2N-PS-Odw" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="bs0-8m-YbT"/>
+                    <constraint firstItem="6CU-VM-HaO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="mvD-1j-LKR"/>
+                    <constraint firstItem="Hgc-Po-qfq" firstAttribute="leading" secondItem="6CU-VM-HaO" secondAttribute="trailing" constant="24" id="nfR-vg-MTe"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Hgc-Po-qfq" secondAttribute="bottom" constant="1" id="oXZ-Pg-FQ4"/>
+                    <constraint firstItem="Hgc-Po-qfq" firstAttribute="top" secondItem="E2N-PS-Odw" secondAttribute="bottom" constant="16" id="wub-z2-d4s"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="repositoryAuthorLabel" destination="6CU-VM-HaO" id="9xw-jh-sgB"/>
+                <outlet property="repositoryNameLabel" destination="E2N-PS-Odw" id="MiM-O1-qds"/>
+                <outlet property="repositoryStarsLabel" destination="Hgc-Po-qfq" id="vkf-zo-vcQ"/>
+            </connections>
+            <point key="canvasLocation" x="5" y="-242"/>
+        </tableViewCell>
+    </objects>
+</document>
