@@ -16,7 +16,7 @@ class RepostoryListViewController: UIViewController {
 	private let filterActionSheet = UIAlertController(title: "Choose filter option", message: nil, preferredStyle: .actionSheet)
 	weak var output: RepositoryListOutput?
 	let searchController = UISearchController(searchResultsController: nil)
-	
+	var taskForTimeLimit: DispatchWorkItem?
 	var dataDisplayManager = RepositoryDataDisplayManager()
 	var repositoryListInteractor: RepositoryListInteractor?
 	
@@ -93,6 +93,25 @@ class RepostoryListViewController: UIViewController {
 		loadingAlertController = UIAlertController.createLoadingAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 	}
 	
+	fileprivate func presentAlertQueryInProcess() {
+		
+		present(loadingAlertController!, animated: true, completion: nil)
+		
+		let secondsToWait = DispatchTime.now() + 5
+		
+		let failAlertController = UIAlertController(title: "Connection lost", message: nil, preferredStyle: .alert)
+		let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+		
+		failAlertController.addAction(okAction)
+		
+		taskForTimeLimit = DispatchWorkItem {
+			self.loadingAlertController?.dismiss(animated: true, completion: nil)
+			self.present(failAlertController, animated: true, completion: nil)
+		}
+		
+		DispatchQueue.main.asyncAfter(deadline: secondsToWait, execute: taskForTimeLimit!)
+	}
+	
 	@IBAction func filterButtonPressed(_ sender: Any) {
 		present(filterActionSheet, animated: true, completion: nil)
 	}
@@ -113,15 +132,22 @@ extension RepostoryListViewController: UITableViewDelegate {
 extension RepostoryListViewController: RepositoryListInteractorOutput {
 	
 	func errorHappend(_ message: String) {
-		showWarningAlert(with: message)
+		
+		DispatchQueue.main.async {
+			self.showWarningAlert(with: message)
+			self.loadingAlertController?.dismiss(animated: true, completion: nil)
+		}
+		taskForTimeLimit?.cancel()
 	}
 	
 	func sendRepositories(_ repositories: [Repository]) {
+		
 		DispatchQueue.main.async {
 			self.dataDisplayManager.setRepositories(repositories)
 			self.repositoryTableView.reloadData()
 			self.loadingAlertController?.dismiss(animated: true, completion: nil)
 		}
+		taskForTimeLimit?.cancel()
 	}
 }
 
@@ -138,9 +164,8 @@ extension RepostoryListViewController: UISearchBarDelegate {
 			showWarningAlert(with: "No internet connection")
 			return
 		}
-		
+		presentAlertQueryInProcess()
 		repositoryListInteractor?.fetchRepositories(with: searchBar.text!)
-		present(loadingAlertController!, animated: true, completion: nil)
 	}
 }
 
